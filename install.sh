@@ -69,6 +69,20 @@ if [[ `uname` =~ "Darwin" ]]; then
   ssh-add -K ~/.ssh/id_ed25519
 fi
 
+
+if [[ "$(uname -s)" == "Linux" ]]; then
+  for name in aliases gitconfig irbrc rspec zprofile zshrc; do
+    if [ ! -d "$name" ]; then
+      target="$HOME/.$name"
+      backup $target
+      symlink $PWD/$name $target
+    fi
+done
+
+else
+  echo "This environment is NOT Linux."
+fi
+
 # Refresh the current terminal with the newly installed configuration
 exec zsh
 

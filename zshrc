@@ -22,8 +22,8 @@ export PATH="${HOME}/.rbenv/bin:${PATH}" # Needed for Linux/WSL
 type -a rbenv > /dev/null && eval "$(rbenv init -)"
 
 # Load pyenv (to manage your Python versions)
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)" && RPROMPT+='[🐍 $(pyenv version-name)]'
+# export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+# type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)" && RPROMPT+='[🐍 $(pyenv version-name)]'
 
 # Load nvm (to manage your node versions)
 export NVM_DIR="$HOME/.nvm"
@@ -70,3 +70,33 @@ export EDITOR=code
 
 # Set ipdb as the default Python debugger
 export PYTHONBREAKPOINT=ipdb.set_trace
+
+export UV_PROJECT_ENVIRONMENT=~/lewagonenv
+
+
+export GOOGLE_APPLICATION_CREDENTIALS='/Users/abdellatif/code/Abdl242/gcp/gleaming-vision-395116-44b253a7cf00.json'
+
+
+function myls() {
+    if [ $# -eq 0 ]; then
+        ls -l *
+    else
+        local commit_msg="update"
+        local branch="master"
+
+        if [ $# -eq 1 ]; then
+            commit_msg="$1"
+        elif [ $# -ge 2 ]; then
+            commit_msg="$1"
+            branch="$2"
+        fi
+
+        git add .
+        git commit -m "$commit_msg"
+        git push origin "$branch"
+    fi
+}
+
+export GITHUB_USERNAME="abdl242"
+
+source ~/lewagonenv/bin/activate

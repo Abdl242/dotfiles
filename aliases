@@ -7,3 +7,48 @@ alias serve='ruby -run -e httpd . -p 8000' # Or python -m SimpleHTTPServer :)
 
 # NOTE: On Q3 2021, Le Wagon decided to change the Web Dev curriculum default text editor
 alias stt="echo 'Launching VS Code instead of Sublime Text... (cf ~/.aliases)' && code ."
+
+
+# Get External IP / Internet Speed
+alias myip="curl https://ipinfo.io/json" # or /ip for plain-text ip
+alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
+
+# Quickly serve the current directory as HTTP
+alias serve='ruby -run -e httpd . -p 8000' # Or python -m SimpleHTTPServer :)
+
+# NOTE: On Q3 2021, Le Wagon decided to change the Web Dev curriculum default text editor
+alias stt="echo 'Launching VS Code instead of Sublime Text... (cf ~/.aliases)' && code ."
+
+alias create_project="""mkdir -p data;
+mkdir -p notebooks;
+mkdir -p project ;
+mkdir -p tests;
+mkdir -p project/app;
+mkdir -p project/interface;
+mkdir -p project/ml_logic;
+touch requirements.txt;
+touch .env;
+touch .envrc;
+touch .gitignore;
+touch Makefile;
+touch Readme.md;
+touch setup.py;
+touch  data/.keep;
+touch  notebooks/.keep;
+touch  project/.keep ;
+touch  tests/.keep;
+touch  project/app/.keep;
+touch  project/interface/.keep;
+touch  project/ml_logic/.keep;
+
+echo "# Project Title"
+>> README.md; echo "Add your project description here." >> README.md
+
+"""
+
+
+alias gpush='myls'
+
+alias ozs='code ~/.zshrc'
+
+alias sizeme="du -sh .* * | sort -rh"

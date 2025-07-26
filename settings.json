@@ -80,4 +80,8 @@
     "workbench.settings.useSplitJSON": true,
     "workbench.startupEditor": "newUntitledFile",
     "workbench.panel.defaultLocation": "right",
+
+
+
+      "python.defaultInterpreterPath": "/home/lewagonenv/bin/python"
 }
