@@ -4,7 +4,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
 # Useful oh-my-zsh plugins for Le Wagon bootcamps
-plugins=(git gitfast last-working-dir common-aliases zsh-syntax-highlighting history-substring-search)
+plugins=(git gitfast last-working-dir common-aliases zsh-syntax-highlighting history-substring-search direnv )
 
 # (macOS-only) Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/docs/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
@@ -99,6 +99,8 @@ function myls() {
 
 export GITHUB_USERNAME="abdl242"
 
-source ~/lewagonenv/bin/activate
+# source ~/lewagonenv/bin/activate
 
-. "$HOME/.local/bin/env"
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+export SPARK_HOME=/opt/homebrew/Cellar/apache-spark/3.5.0/libexec
+export PATH=$PATH:$SPARK_HOME/bin
