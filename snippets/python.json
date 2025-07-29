@@ -1,0 +1,249 @@
+{
+  // --- PANDAS UTILITIES ---
+  "Pandas Read CSV": {
+    "prefix": "pdread",
+    "body": [
+      "import pandas as pd",
+      "df = pd.read_csv('${1:path/to/file.csv}')",
+      "df.head()"
+    ],
+    "description": "Read CSV into DataFrame"
+  },
+  "Pandas Data Overview": {
+    "prefix": "pdinfo",
+    "body": [
+      "print(df.shape)",
+      "print(df.dtypes)",
+      "print(df.describe(include='all'))",
+      "print(df.info())"
+    ],
+    "description": "Show DataFrame structure and statistics"
+  },
+  "Pandas Handle NA": {
+    "prefix": "pdna",
+    "body": [
+      "# Drop missing values",
+      "df = df.dropna()",
+      "# Fill missing values",
+      "df = df.fillna(${1:value})"
+    ],
+    "description": "Drop or fill NAs"
+  },
+  "Pandas GroupBy": {
+    "prefix": "pdgroup",
+    "body": [
+      "df.groupby('${1:col}').${2:sum}()"
+    ],
+    "description": "Group by column and aggregate"
+  },
+  "Pandas Merge": {
+    "prefix": "pdmerge",
+    "body": [
+      "df_merged = pd.merge(${1:df1}, ${2:df2}, on='${3:key}')"
+    ],
+    "description": "Merge DataFrames"
+  },
+  "Pandas Pivot": {
+    "prefix": "pdpivot",
+    "body": [
+      "pivot = df.pivot_table(index='${1:index}', columns='${2:cols}', values='${3:vals}', aggfunc='${4:mean}')"
+    ],
+    "description": "Create a pivot table"
+  },
+
+  // --- NUMPY ---
+  "Numpy Array": {
+    "prefix": "npnew",
+    "body": [
+      "import numpy as np",
+      "arr = np.array([${1:1,2,3}])"
+    ],
+    "description": "Create numpy array"
+  },
+
+  // --- SEABORN & MATPLOTLIB PLOTTING ---
+  "Seaborn Quick Plot": {
+    "prefix": "snsplot",
+    "body": [
+      "import seaborn as sns",
+      "import matplotlib.pyplot as plt",
+      "sns.${1|barplot,scatterplot,lineplot,heatmap,pairplot|}(data=${2:df}, x='${3:x}', y='${4:y}')",
+      "plt.show()"
+    ],
+    "description": "Standard Seaborn plot (type selectable)"
+  },
+  "Seaborn Correlation Heatmap": {
+    "prefix": "snsheat",
+    "body": [
+      "import seaborn as sns",
+      "import matplotlib.pyplot as plt",
+      "sns.heatmap(df.corr(), annot=True, cmap='coolwarm')",
+      "plt.title('Correlation Matrix')",
+      "plt.show()"
+    ],
+    "description": "Correlation heatmap"
+  },
+
+  // --- SKLEARN MACHINE LEARNING ---
+  "Sklearn Train-Test Split": {
+    "prefix": "sktrainsplit",
+    "body": [
+      "from sklearn.model_selection import train_test_split",
+      "X_train, X_test, y_train, y_test = train_test_split(${1:X}, ${2:y}, test_size=0.2, random_state=42)"
+    ],
+    "description": "Train-test split"
+  },
+  "Sklearn Standard Scaler": {
+    "prefix": "scaler",
+    "body": [
+      "from sklearn.preprocessing import StandardScaler",
+      "scaler = StandardScaler()",
+      "X_scaled = scaler.fit_transform(${1:X})"
+    ],
+    "description": "Feature scaling"
+  },
+  "Sklearn GridSearch": {
+    "prefix": "skgrid",
+    "body": [
+      "from sklearn.model_selection import GridSearchCV",
+      "from sklearn.ensemble import RandomForestClassifier",
+      "params = {'n_estimators': [10, 50, 100], 'max_depth': [None, 10, 20]}",
+      "clf = RandomForestClassifier()",
+      "grid = GridSearchCV(clf, params, cv=5)",
+      "grid.fit(${1:X_train}, ${2:y_train})",
+      "print(grid.best_params_)"
+    ],
+    "description": "Hyperparameter grid search"
+  },
+  "Sklearn Pipeline": {
+    "prefix": "skpipe",
+    "body": [
+      "from sklearn.pipeline import Pipeline",
+      "from sklearn.preprocessing import StandardScaler",
+      "from sklearn.ensemble import RandomForestClassifier",
+      "pipeline = Pipeline([",
+      "    ('scaler', StandardScaler()),",
+      "    ('clf', RandomForestClassifier())",
+      "])",
+      "pipeline.fit(${1:X_train}, ${2:y_train})"
+    ],
+    "description": "Pipeline for scaling and ML"
+  },
+  "Sklearn Model Evaluation": {
+    "prefix": "skeval",
+    "body": [
+      "from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score",
+      "y_pred = model.predict(${1:X_test})",
+      "print('Accuracy:', accuracy_score(${2:y_test}, y_pred))",
+      "print('Precision:', precision_score(${2:y_test}, y_pred))",
+      "print('Recall:', recall_score(${2:y_test}, y_pred))",
+      "print('F1:', f1_score(${2:y_test}, y_pred))"
+    ],
+    "description": "Classification metrics"
+  },
+  "Sklearn Model Save/Load": {
+    "prefix": "sksave",
+    "body": [
+      "import joblib",
+      "joblib.dump(model, '${1:model}.pkl')  # Save",
+      "model = joblib.load('${1:model}.pkl')  # Load"
+    ],
+    "description": "Persist and restore model"
+  },
+
+  // --- TENSORFLOW / KERAS ---
+  "TensorFlow Import": {
+    "prefix": "tfimport",
+    "body": [
+      "import tensorflow as tf"
+    ],
+    "description": "Import TensorFlow"
+  },
+  "TensorFlow Simple Sequential Model": {
+    "prefix": "tfseq",
+    "body": [
+      "model = tf.keras.Sequential([",
+      "    tf.keras.layers.Dense(${1:units}, activation='${2:relu}', input_shape=(${3:n_features},)),",
+      "    tf.keras.layers.Dense(${4:out_units}, activation='${5:softmax}')",
+      "])",
+      "model.compile(optimizer='${6:adam}', loss='${7:sparse_categorical_crossentropy}', metrics=['accuracy'])",
+      "model.fit(${8:X_train}, ${9:y_train}, epochs=${10:10}, batch_size=${11:32}, validation_split=0.2)"
+    ],
+    "description": "Create, compile and fit model"
+  },
+  "Keras Model Save/Load": {
+    "prefix": "tfsave",
+    "body": [
+      "model.save('${1:model_name}.h5')",
+      "# Load: tf.keras.models.load_model('${1:model_name}.h5')"
+    ],
+    "description": "Save and load Keras model"
+  },
+
+  // --- PYTORCH ---
+  "PyTorch Model Template": {
+    "prefix": "ptnn",
+    "body": [
+      "import torch",
+      "import torch.nn as nn",
+      "",
+      "class Net(nn.Module):",
+      "    def __init__(self):",
+      "        super(Net, self).__init__()",
+      "        self.fc1 = nn.Linear(${1:input_dim}, ${2:hidden_dim})",
+      "        self.fc2 = nn.Linear(${2:hidden_dim}, ${3:output_dim})",
+      "",
+      "    def forward(self, x):",
+      "        x = torch.relu(self.fc1(x))",
+      "        x = self.fc2(x)",
+      "        return x",
+      "",
+      "model = Net()"
+    ],
+    "description": "PyTorch simple MLP"
+  },
+  "PyTorch Training Loop": {
+    "prefix": "pttrain",
+    "body": [
+      "optimizer = torch.optim.Adam(model.parameters(), lr=${1:0.001})",
+      "loss_fn = nn.${2:CrossEntropyLoss}()",
+      "for epoch in range(${3:epochs}):",
+      "    for data, target in ${4:train_loader}:",
+      "        optimizer.zero_grad()",
+      "        output = model(data)",
+      "        loss = loss_fn(output, target)",
+      "        loss.backward()",
+      "        optimizer.step()"
+    ],
+    "description": "Typical training loop"
+  },
+  "PyTorch Save/Load Model": {
+    "prefix": "ptsave",
+    "body": [
+      "torch.save(model.state_dict(), '${1:filename}.pt')  # Save",
+      "model.load_state_dict(torch.load('${1:filename}.pt'))  # Load"
+    ],
+    "description": "Persist torch model"
+  },
+
+  // --- AUTOMATION & UTILITIES ---
+  "Batch Prediction": {
+    "prefix": "batchpred",
+    "body": [
+      "# Batch predictions",
+      "preds = model.predict(${1:X_large})",
+      "df['predictions'] = preds"
+    ],
+    "description": "Add model predictions to DataFrame"
+  },
+  "Log Results JSON": {
+    "prefix": "logjson",
+    "body": [
+      "import json",
+      "def log_results(results, fname='results.json'):",
+      "    with open(fname, 'w') as f:",
+      "        json.dump(results, f)"
+    ],
+    "description": "Log to JSON"
+  }
+}

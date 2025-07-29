@@ -55,7 +55,7 @@ else
   fi
 fi
 
-for name in settings.json keybindings.json; do
+for name in settings.json keybindings.json snippets; do
   target="$CODE_PATH/$name"
   backup $target
   symlink $PWD/$name $target

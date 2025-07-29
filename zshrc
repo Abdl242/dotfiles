@@ -100,3 +100,5 @@ function myls() {
 export GITHUB_USERNAME="abdl242"
 
 source ~/lewagonenv/bin/activate
+
+. "$HOME/.local/bin/env"
