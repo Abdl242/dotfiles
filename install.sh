@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-# Define a function which rename a `target` file to `target.backup` if the file
-# exists and if it's a 'real' file, ie not a symlink
+# Define a function which renames a `target` file to `target.backup` if the file
+# exists and if it's a 'real' file, i.e., not a symlink
 backup() {
   target=$1
   if [ -e "$target" ]; then
@@ -43,13 +43,13 @@ fi
 cd "$CURRENT_DIR"
 
 # Symlink VS Code settings and keybindings to the present `settings.json` and `keybindings.json` files
-# If it's a macOS
+# If it's macOS
 if [[ `uname` =~ "Darwin" ]]; then
   CODE_PATH=~/Library/Application\ Support/Code/User
-# Else, it's a Linux
+# Else, it's a Linux system
 else
   CODE_PATH=~/.config/Code/User
-  # If this folder doesn't exist, it's a WSL
+  # If this folder doesn't exist, assume WSL fallback
   if [ ! -e $CODE_PATH ]; then
     CODE_PATH=~/.vscode-server/data/Machine
   fi
@@ -69,15 +69,32 @@ if [[ `uname` =~ "Darwin" ]]; then
   ssh-add -K ~/.ssh/id_ed25519
 fi
 
-
 if [[ "$(uname -s)" == "Linux" ]]; then
+  # Symlink regular dotfiles (again, accounting for Linux case)
   for name in aliases gitconfig irbrc rspec zprofile zshrc; do
     if [ ! -d "$name" ]; then
       target="$HOME/.$name"
       backup $target
       symlink $PWD/$name $target
     fi
-done
+  done
+
+  # Symlink hypr and waybar config directories under ~/.config/
+  for dir in hypr waybar; do
+    src="$PWD/$dir"
+    target="$HOME/.config/$dir"
+    if [ -d "$src" ]; then
+      if [ -e "$target" ] && [ ! -L "$target" ]; then
+        # Backup existing directory by renaming with .backup
+        mv "$target" "${target}.backup"
+        echo "-----> Moved your old $target to ${target}.backup"
+      fi
+      if [ ! -e "$target" ]; then
+        echo "-----> Symlinking $target to $src"
+        ln -s "$src" "$target"
+      fi
+    fi
+  done
 
 else
   echo "This environment is NOT Linux."

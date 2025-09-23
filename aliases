@@ -52,3 +52,13 @@ alias gpush='myls'
 alias ozs='code ~/.zshrc'
 
 alias sizeme="du -sh .* * | sort -rh"
+
+alias lwenv="source ~/lewagonenv/.lewagonenv/bin/activate"
+
+alias sda_report='firefox --new-tab "https://docs.google.com/spreadsheets/d/1VmgZw8V0KP9hOjaYxgvkFSbiRmvxBqv5cZR1WtPpkPU/edit?gid=2084985854#gid=2084985854" --new-tab "https://docs.google.com/spreadsheets/d/1JrIWgN9O1QiUufcyD1kPxkFA1KSuSKPtK2KwiboaLgA/edit?gid=0#gid=0" --new-tab "https://docs.google.com/spreadsheets/d/1dGF5PdrAVAXH20m86CAI-iGD0I-TP2jWF2gmy3YNv7w/edit?gid=1835126524#gid=1835126524"'
+
+
+alias activate_local="source .venv/bin/activate"
+
+
+alias update-dotfiles='zsh ~/code/Abdl242/dotfiles/update_repo_from_configs.sh'

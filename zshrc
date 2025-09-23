@@ -104,3 +104,25 @@ export GITHUB_USERNAME="abdl242"
 export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 export SPARK_HOME=/opt/homebrew/Cellar/apache-spark/3.5.0/libexec
 export PATH=$PATH:$SPARK_HOME/bin
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/abdellatif/google-cloud-sdk/path.zsh.inc' ]; then . '/home/abdellatif/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/abdellatif/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/abdellatif/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+export PYTHONPATH="/home/abdellatif/code/lewagon/04-Decision-Science/01-Project-Setup/data-context-and-setup:$PYTHONPATH"
+
+
+activate_venv_or_lwenv() {
+    if [ -f ".venv/bin/activate" ]; then
+        source .venv/bin/activate
+    else
+        lwenv
+    fi
+}
+
+cd() {
+    builtin cd "$@" && activate_venv_or_lwenv
+}
