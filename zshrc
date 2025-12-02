@@ -74,7 +74,7 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 export UV_PROJECT_ENVIRONMENT=~/lewagonenv
 
 
-export GOOGLE_APPLICATION_CREDENTIALS='/Users/abdellatif/code/Abdl242/gcp/gleaming-vision-395116-44b253a7cf00.json'
+export GOOGLE_APPLICATION_CREDENTIALS="$HOME/code/Abdl242/gcp/gleaming-vision-395116-44b253a7cf00.json"
 
 
 function myls() {
@@ -106,23 +106,80 @@ export SPARK_HOME=/opt/homebrew/Cellar/apache-spark/3.5.0/libexec
 export PATH=$PATH:$SPARK_HOME/bin
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/abdellatif/google-cloud-sdk/path.zsh.inc' ]; then . '/home/abdellatif/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/home/abdellatifhani/google-cloud-sdk/path.zsh.inc' ]; then . '/home/abdellatifhani/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/abdellatif/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/abdellatif/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/home/abdellatifhani/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/abdellatifhani/google-cloud-sdk/completion.zsh.inc'; fi
 
 
-export PYTHONPATH="/home/abdellatif/code/lewagon/04-Decision-Science/01-Project-Setup/data-context-and-setup:$PYTHONPATH"
+export PYTHONPATH="/home/abdellatifhani/code/lewagon/04-Decision-Science/01-Project-Setup/data-context-and-setup:$PYTHONPATH"
 
 
-activate_venv_or_lwenv() {
-    if [ -f ".venv/bin/activate" ]; then
-        source .venv/bin/activate
-    else
-        lwenv
+# activate_venv_or_lwenv() {
+#     if [ -f ".venv/bin/activate" ]; then
+#         source .venv/bin/activate
+#     else
+#         lwenv
+#     fi
+# }
+
+# cd() {
+#     builtin cd "$@" && activate_venv_or_lwenv
+# }
+# function auto_activate_venv() {
+#   if [[ -d ".venv" ]]; then
+#     if [[ "$VIRTUAL_ENV" != "$(pwd)/.venv" ]]; then
+#       deactivate 2>/dev/null
+#       export VIRTUAL_ENV="$(pwd)/.venv"
+#       export PATH="$VIRTUAL_ENV/bin:$PATH"
+#       source "$VIRTUAL_ENV/bin/activate"
+#     fi
+#   elif [[ -d "/Users/abdellatifhani/lewagonenv/.lewagonenv" ]]; then
+#     if [[ "$VIRTUAL_ENV" != "/Users/abdellatifhani/lewagonenv/.lewagonenv" ]]; then
+#       deactivate 2>/dev/null
+#       export VIRTUAL_ENV="/Users/abdellatifhani/lewagonenv/.lewagonenv"
+#       export PATH="$VIRTUAL_ENV/bin:$PATH"
+#       source "$VIRTUAL_ENV/bin/activate"
+#     fi
+#   else
+#     deactivate 2>/dev/null
+#   fi
+# }
+
+
+function auto_activate_venv() {
+  local current_dir=$(basename "$(pwd)")
+  local venv_name=".${current_dir}"
+
+  if [[ -d "$venv_name" ]]; then
+    if [[ "$VIRTUAL_ENV" != "$(pwd)/$venv_name" ]]; then
+      deactivate 2>/dev/null
+      export VIRTUAL_ENV="$(pwd)/$venv_name"
+      export PATH="$VIRTUAL_ENV/bin:$PATH"
+      source "$VIRTUAL_ENV/bin/activate"
     fi
+  elif [[ -d ".venv" ]]; then
+    if [[ "$VIRTUAL_ENV" != "$(pwd)/.venv" ]]; then
+      deactivate 2>/dev/null
+      export VIRTUAL_ENV="$(pwd)/.venv"
+      export PATH="$VIRTUAL_ENV/bin:$PATH"
+      source "$VIRTUAL_ENV/bin/activate"
+    fi
+  elif [[ -d "/Users/abdellatifhani/lewagonenv/.lewagonenv" ]]; then
+    if [[ "$VIRTUAL_ENV" != "/Users/abdellatifhani/lewagonenv/.lewagonenv" ]]; then
+      deactivate 2>/dev/null
+      export VIRTUAL_ENV="/Users/abdellatifhani/lewagonenv/.lewagonenv"
+      export PATH="$VIRTUAL_ENV/bin:$PATH"
+      source "$VIRTUAL_ENV/bin/activate"
+    fi
+  else
+    deactivate 2>/dev/null
+  fi
 }
 
-cd() {
-    builtin cd "$@" && activate_venv_or_lwenv
-}
+
+autoload -U add-zsh-hook
+add-zsh-hook chpwd auto_activate_venv
+auto_activate_venv
+export PATH="/opt/homebrew/opt/qt@5/bin:$PATH"
+export PATH="/opt/homebrew/opt/qt@5/bin:$PATH"

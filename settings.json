@@ -74,13 +74,15 @@
     "window.restoreWindows": "none",
     "window.newWindowDimensions": "maximized",
     "workbench.editor.enablePreview": true,
-    "workbench.iconTheme": "vscode-great-icons",
+    "workbench.iconTheme": "Monokai Pro Light Icons",
     "workbench.settings.editor": "json",
     "workbench.settings.openDefaultSettings": true,
     "workbench.settings.useSplitJSON": true,
     "workbench.startupEditor": "newUntitledFile",
     "workbench.panel.defaultLocation": "right",
     "makefile.configureOnOpen": true,
+    "python.defaultInterpreterPath": "/Users/abdellatifhani/lewagonenv/.lewagonenv",
+    "workbench.colorTheme": "Visual Studio Dark",
 
 
 

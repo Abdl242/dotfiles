@@ -1,3 +1,8 @@
+Host ssh.runpod.io
+  HostName ssh.runpod.io
+  User 404fhce93mxl44-64410c0c
+  IdentityFile ~/.ssh/id_ed25519_p
+
 Host *
   UseKeychain yes
   AddKeysToAgent yes

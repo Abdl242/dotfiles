@@ -53,5 +53,10 @@
 [init]
   defaultBranch = master
 [user]
-	email = ha691@protonmail.com
-	name = abdellatif Hani
+	email = 91426120+Abdl242@users.noreply.github.com
+	name = Abdl242
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
